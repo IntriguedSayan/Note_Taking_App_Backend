@@ -20,11 +20,11 @@ app.get("/",(req,res)=>{
 
 app.listen(PORT,async()=>{
     try{
-        await connection
+        await connection;
         console.log(`Listening on port ${PORT}`)
     }catch(err){
         console.log("connection Failed")
-        console.log(err)
+        console.log(err.message);
     }
     
 })
