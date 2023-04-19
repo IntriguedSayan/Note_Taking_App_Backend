@@ -1,7 +1,7 @@
 const express=require("express")
-const connection=require("./Config/db")
-const {authController}=require("./Routes/auth.Route")
-const {notesController}=require("./Routes/notes.Route")
+const connection=require("./src/Config/db")
+const {authController}=require("./src/Routes/auth.Route")
+const {notesController}=require("./src/Routes/notes.Route")
 require("dotenv").config()
 const cors=require("cors")
 
