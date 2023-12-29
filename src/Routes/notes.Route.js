@@ -1,4 +1,4 @@
-const {Router, application}=require("express")
+const {Router}=require("express")
 const {NoteModel}=require("../Models/note.model")
 const { authentication } = require("../Middlewares/authentication")
 const { authorization }=require("../Middlewares/authorization")
@@ -6,7 +6,7 @@ const { authorization }=require("../Middlewares/authorization")
 const notesController=Router();
 
 
-notesController.get("/",authentication,async(req,res)=>{
+notesController.get("/",authentication,authorization,async(req,res)=>{
 
     try{
         const{userId,name}=req.body;
@@ -53,8 +53,8 @@ notesController.post("/create",authentication,async(req,res)=>{
         // console.log(newPayload)
         const notes=await new NoteModel(newPayload)
    
-            notes.save()
-            return res.status(201).json({msg:"Note Created"});
+        notes.save()
+        return res.status(201).json({msg:"Note Created"});
         
     }catch(err){
 
