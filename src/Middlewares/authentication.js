@@ -14,6 +14,7 @@ const authentication=(req,res,next)=>{
                 return res.json({err:err});
             }else{
                 req.body.userId=decoded.userId;
+                console.log(decoded.userId);
                 req.body.name=decoded.name;
                 next();
             }

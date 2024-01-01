@@ -6,7 +6,7 @@ const { authorization }=require("../Middlewares/authorization")
 const todoController = Router();
 
 
-todoController.get("/todos",authentication,authorization,async(req,res)=>{
+todoController.get("/",authentication,async(req,res)=>{
 
 
     try{
@@ -27,12 +27,13 @@ todoController.get("/todos",authentication,authorization,async(req,res)=>{
 
 })
 
-todoController.get("/todos/:id",authentication,authorization,async(req,res)=>{
+todoController.get("/singleTodo/:id",authentication,authorization,async(req,res)=>{
 
 
     try{
 
         const id = req.params.id;
+        console.log(id)
         const todo = await TodoModel.findById({_id:id});
         if(!todo)
             return res.status(500).json({message:"Something went wrong"});
@@ -73,13 +74,17 @@ todoController.post("/addMainTodo",authentication,async(req,res)=>{
 })
 
 
-todoController.post("/addSubTodo/:id",authentication,async(req,res)=>{
+todoController.patch("/addSubTodo/:id",authentication,async(req,res)=>{
 
     try{
-
+        
         const mainTodoId = req.params.id;
         const payload = req.body;
-        const result = await TodoModel.findByIdAndUpdate({_id:mainTodoId},{$push:{subTodos:payload}});
+        if(!payload){
+            return res.status(400).json({msg:"Please fill all the required fields"});
+        }
+        const result = await TodoModel.findByIdAndUpdate({_id:mainTodoId},{$push:{subTodos:payload}},{new:true});
+
         if(!result){
             res.status(404).json({msg:"Error occured while updating subtodo"});
         }
@@ -96,6 +101,6 @@ todoController.post("/addSubTodo/:id",authentication,async(req,res)=>{
 })
 
 
-
-
-
+module.exports = {
+    todoController
+}
