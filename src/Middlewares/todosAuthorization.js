@@ -14,7 +14,7 @@ const todoAuthorization=async(req,res,next)=>{
                 return res.send("You are not authorized to perform this operation.");
             }
         }else{
-            return res.status(500).json({"msg":"Some error occurred"});
+            return res.status(404).json({"msg":"Some error occurred"});
         }
         
     }catch(err){

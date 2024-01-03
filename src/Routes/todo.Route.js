@@ -39,20 +39,22 @@ todoController.get(
   }
 );
 
-todoController.post("/addMainTodo", todoAuthorization, async (req, res) => {
+todoController.post("/addMainTodo", authentication, async (req, res) => {
   try {
     const { mainTodo, userId } = req.body;
-    if (!mainTodo || !userId) {
-      return res
+    if ( mainTodo && userId) {
+        // const payload = req.body;
+        const newPayload = { mainTodo, userId };
+
+        const todo = await new TodoModel(newPayload);
+        todo.save();
+        return res.status(201).json({ msg: "Successfully todo added" });
+    }
+    
+    return res
         .status(400)
         .json({ msg: "Please fill all the required fields" });
-    }
-    // const payload = req.body;
-    const newPayload = { ...mainTodo, userId };
 
-    const todo = await new TodoModel(newPayload);
-    todo.save();
-    return res.status(201).json({ msg: "Successfully todo added" });
   } catch (err) {
     res.status(500).json({ msg: err.message, err: err });
   }
@@ -149,7 +151,26 @@ todoController.patch(
 );
 
 todoController.delete("/deleteMainTodo/:id",authentication,todoAuthorization,async(req,res)=>{
+  
+  try{
 
+    const mainTodoId = req.params.id;
+    const deletedMainTodo = await TodoModel.findByIdAndDelete({_id:mainTodoId});
+
+    // console.log(deletedMainTodo);
+    if(deletedMainTodo){
+
+      return res.status(200).json({msg:"deleted successfully", deletedMainTodo:deletedMainTodo});
+
+    }
+
+    return res.status(404).json({msg:"Wrong request", err:deletedMainTodo});
+
+  }catch (err) {
+
+    return res.status(500).json({message:err.message, err:err});
+
+  }
     
 
 })
