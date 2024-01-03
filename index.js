@@ -20,7 +20,7 @@ app.get("/",(req,res)=>{
     res.json({msg:"Welcome to homePage"})
 })
 
-app.get("*",(req,res)=>{
+app.use("*",(req,res)=>{
 
     return res.json({msg:"You have entered a wrong path"});
     
