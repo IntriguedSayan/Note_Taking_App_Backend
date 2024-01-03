@@ -1,10 +1,10 @@
-const {NoteModel}=require("../Models/note.model")
+const {TodoModel} = require("../Models/todo.model.js");
 
-const authorization=async(req,res,next)=>{
+const todoAuthorization=async(req,res,next)=>{
     
     try{
         const userId = req.body.userId;
-        const checkedData = await NoteModel.findById({_id:req.params.id});
+        const checkedData = await TodoModel.findById({_id:req.params.id});
         if(checkedData){
             // console.log(checkedData);
             if(checkedData?.userId===userId){
@@ -14,7 +14,7 @@ const authorization=async(req,res,next)=>{
                 return res.send("You are not authorized to perform this operation.");
             }
         }else{
-            return res.status(500).json({"msg":"Data does not exist"});
+            return res.status(500).json({"msg":"Some error occurred"});
         }
         
     }catch(err){
@@ -24,5 +24,5 @@ const authorization=async(req,res,next)=>{
 }
 
 module.exports={
-    authorization
+    todoAuthorization
 }

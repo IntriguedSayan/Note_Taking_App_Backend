@@ -88,9 +88,10 @@ authController.post("/login",async(req,res)=>{
         }
         const hashedPassword=user.password
         const checkPassword = bcrypt.compareSync(toString(password), hashedPassword);
+        const userId = user._id;
         if(checkPassword){
 
-            const token=jwt.sign({userId:user._id,name:user.name},process.env.SECRET_KEY);
+            const token=jwt.sign({userId:userId,name:user.name},process.env.SECRET_KEY);
             return res.status(200).json({message:"login succesful",token:token});
 
         }

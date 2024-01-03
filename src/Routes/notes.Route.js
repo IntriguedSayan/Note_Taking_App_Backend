@@ -6,7 +6,7 @@ const { authorization }=require("../Middlewares/authorization")
 const notesController=Router();
 
 
-notesController.get("/",authentication,authorization,async(req,res)=>{
+notesController.get("/",authentication,async(req,res)=>{
 
     try{
         const{userId,name}=req.body;
