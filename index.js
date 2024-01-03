@@ -20,6 +20,12 @@ app.get("/",(req,res)=>{
     res.json({msg:"Welcome to homePage"})
 })
 
+app.get("*",(req,res)=>{
+
+    return res.json({msg:"You have entered a wrong path"});
+    
+})
+
 app.listen(PORT,async()=>{
     try{
         await connection;
