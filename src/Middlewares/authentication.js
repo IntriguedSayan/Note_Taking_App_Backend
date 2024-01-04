@@ -11,7 +11,7 @@ const authentication=(req,res,next)=>{
     
         jwt.verify(token,`${process.env.SECRET_KEY}`,(err,decoded)=>{
             if(err){
-                return res.json({err:err});
+                return res.json({message:err.message,err:err});
             }else{
                 req.body.userId=decoded.userId;
                 // console.log(decoded.userId);
