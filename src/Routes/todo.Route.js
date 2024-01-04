@@ -2,10 +2,11 @@ const { Router } = require("express");
 const { TodoModel } = require("../Models/todo.model");
 const { authentication } = require("../Middlewares/authentication");
 const { todoAuthorization } = require("../Middlewares/todosAuthorization");
+const { authorizationForGetReq } = require("../Middlewares/getReq");
 
 const todoController = Router();
 
-todoController.get("/", authentication, async (req, res) => {
+todoController.get("/", authentication, authorizationForGetReq, async (req, res) => {
   try {
     const { userId, name } = req.body;
     const todos = await TodoModel.find({ userId: userId });

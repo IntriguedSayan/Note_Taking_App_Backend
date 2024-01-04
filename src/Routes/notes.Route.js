@@ -1,12 +1,13 @@
 const {Router}=require("express")
 const {NoteModel}=require("../Models/note.model")
 const { authentication } = require("../Middlewares/authentication")
-const { authorization }=require("../Middlewares/authorization")
+const { authorization }=require("../Middlewares/authorization");
+const { authorizationForGetReq } = require("../Middlewares/getReq");
 
 const notesController=Router();
 
 
-notesController.get("/",authentication,async(req,res)=>{
+notesController.get("/",authentication, authorizationForGetReq, async(req,res)=>{
 
     try{
         const{userId,name}=req.body;
