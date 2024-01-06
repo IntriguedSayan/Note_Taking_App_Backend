@@ -7,12 +7,10 @@ const authorizationForGetReq=async(req,res,next)=>{
         const query = req.query.type;
         const userId = req.body.userId;
         const route = req.baseUrl;
-        // console.log(route);
         if(route == "/notes" && query === "notes"){
 
             const checkedData = await NoteModel.find({userId:userId});
             if(!checkedData){
-                // console.log(checkedData);
                 
                 return res.status(404).json({"msg":"Data does not exist"});
                 
@@ -23,7 +21,6 @@ const authorizationForGetReq=async(req,res,next)=>{
         }else if(route == "/todos" && query === "todos"){
             const checkedData = await TodoModel.find({userId:userId});
             if(!checkedData){
-                // console.log(checkedData);
                 
                 return res.status(404).json({"msg":"Data does not exist"});
                 
