@@ -14,7 +14,7 @@ passport.use(new GoogleStrategy({
 
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:7600/auth/google/callback",
+    callbackURL: "http://localhost:7600/google/callback",
     passReqToCallback: true
 
 }, authUser));
