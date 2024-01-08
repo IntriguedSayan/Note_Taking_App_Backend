@@ -3,16 +3,30 @@ const connection=require("./src/Config/db")
 const {authController}=require("./src/Routes/auth.Route")
 const {notesController}=require("./src/Routes/notes.Route")
 const {todoController} = require("./src/Routes/todo.Route")
+const session = require("express-session");
+const passport = require("passport");
+
 require("dotenv").config()
-const cors=require("cors")
+const cors=require("cors");
+const { googleAuthController } = require("./src/Routes/goggleAuth.route")
 
 const app=express()
 
+
 const PORT=process.env.PORT || 7600
 
-app.use(express.json())
 app.use(cors())
+app.use(session({
+    secret:process.env.SESSION_SECRET,
+    resave:false,
+    saveUninitialized:true
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.json())
 app.use("/auth",authController)
+app.use("google",googleAuthController)
 app.use("/notes",notesController)
 app.use("/todos",todoController)
 
