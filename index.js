@@ -1,14 +1,14 @@
 const express=require("express")
 const connection=require("./src/Config/db")
-const {authController}=require("./src/Routes/auth.Route")
-const {notesController}=require("./src/Routes/notes.Route")
-const {todoController} = require("./src/Routes/todo.Route")
+const {authController}=require("./src/Routes/auth.Route.js")
+const {notesController}=require("./src/Routes/notes.Route.js")
+const {todoController} = require("./src/Routes/todo.Route.js")
+const {googleAuthController} = require("./src/Routes/goggleAuth.route.js")
 const session = require("express-session");
 const passport = require("passport");
 
 require("dotenv").config()
 const cors=require("cors");
-const { googleAuthController } = require("./src/Routes/goggleAuth.route")
 
 const app=express()
 
