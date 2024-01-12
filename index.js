@@ -3,7 +3,7 @@ const connection=require("./src/Config/db")
 const {authController}=require("./src/Routes/auth.Route.js")
 const {notesController}=require("./src/Routes/notes.Route.js")
 const {todoController} = require("./src/Routes/todo.Route.js")
-const {googleAuthController} = require("./src/Routes/goggleAuth.route.js")
+const {googleAuthController} = require("./src/Routes/goggleAuth.Route.js")
 const session = require("express-session");
 const passport = require("passport");
 
