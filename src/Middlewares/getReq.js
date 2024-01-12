@@ -30,6 +30,7 @@ const authorizationForGetReq=async(req,res,next)=>{
             }
         }else{
 
+            console.log(query,"-",route );
             return res.status(404).json({"msg":"Pass proper data type"})
 
         }

@@ -49,10 +49,10 @@ notesController.post("/create",authentication,async(req,res)=>{
         if(!userId|| !heading|| !description|| !tag){
                 return res.status(400).json({msg:"Please fill all the input fields"});
         }
-        const payload=req.body
-        const newPayload={...payload,userId:userId}
+        // const payload=req.body
+        const payload = {userId,heading,description,tag};
         // console.log(newPayload)
-        const notes=await new NoteModel(newPayload)
+        const notes=await new NoteModel(payload)
    
         notes.save()
         return res.status(201).json({msg:"Note Created"});

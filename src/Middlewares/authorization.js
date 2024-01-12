@@ -7,7 +7,7 @@ const authorization=async(req,res,next)=>{
         const checkedData = await NoteModel.findById({_id:req.params.id});
         if(checkedData){
             // console.log(checkedData);
-            if(checkedData?.userId===userId){
+            if(checkedData.userId==userId){
                 next()
             }
             else{

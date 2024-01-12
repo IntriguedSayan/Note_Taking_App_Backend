@@ -5,7 +5,7 @@ const noteSchema = new mongoose.Schema(
     heading: { type: String, required: true },
     description: { type: String, required: true },
     tag: { type: String, required: true },
-    userId: { type: String, required: true, unique: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref:"fsuser" },
   },
   {
     versionKey: false,
